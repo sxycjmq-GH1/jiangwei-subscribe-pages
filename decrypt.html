@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>江威订阅解密模块</title>
+  <style>
+    body {
+      font-family: "Segoe UI", "PingFang SC", sans-serif;
+      background: linear-gradient(to bottom right, #f0f4ff, #e0e7ff);
+      padding: 2em;
+      color: #333;
+    }
+    h1 {
+      font-size: 1.8em;
+      color: #2c3e50;
+    }
+    .container {
+      background: #fff;
+      padding: 1.5em;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: auto;
+    }
+    textarea {
+      width: 100%;
+      height: 240px;
+      font-family: monospace;
+      font-size: 0.95em;
+      padding: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      resize: vertical;
+    }
+    .footer {
+      margin-top: 2em;
+      font-size: 0.9em;
+      color: #888;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔐 解密订阅 · 仪式模块</h1>
+    <p>已解密订阅内容如下，可复制使用：</p>
+    <textarea id="output" readonly>正在加载订阅数据...</textarea>
+  </div>
+
+  <div class="footer">
+    江威 · 仪式系统 · 解密模块 v1.0
+  </div>
+
+  <script>
+    fetch('c7192000-9f14-4285-8aab-5020d21e8d43.json')
+      .then(response => response.json())
+      .then(json => {
+        const decoded = atob(json.data);
+        document.getElementById('output').textContent = decoded;
+      })
+      .catch(error => {
+        document.getElementById('output').textContent = '❌ 加载失败：' + error.message;
+      });
+  </script>
+</body>
+</html>
