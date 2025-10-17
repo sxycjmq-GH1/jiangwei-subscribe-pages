@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>江威订阅解密器</title>
+</head>
+<body>
+  <h1>Welcome</h1>
+  <h2>订阅内容解密结果</h2>
+  <pre id="output">正在加载订阅内容...</pre>
+
+  <script>
+    fetch("https://wdmfdljd.imagesxycjmq.dpdns.org/c7192000-b91d-4285-8aab-5002fd1e84d3")
+      .then(res => res.json())
+      .then(json => {
+        const base64 = json.data;
+        const decoded = atob(base64);
+        document.getElementById("output").textContent = decoded;
+      })
+      .catch(err => {
+        document.getElementById("output").textContent = "解密失败：" + err;
+      });
+  </script>
+</body>
+</html>
