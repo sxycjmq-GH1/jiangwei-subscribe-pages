@@ -1,24 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>江威订阅解密器</title>
+  <title>订阅内容解密结果</title>
+  <style>
+    body {
+      font-family: monospace;
+      background: #f5f5f5;
+      padding: 2em;
+      color: #333;
+    }
+    h1 {
+      color: #007acc;
+    }
+    pre {
+      background: #fff;
+      padding: 1em;
+      border: 1px solid #ccc;
+      overflow-x: auto;
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome</h1>
+  <h1>Welcome 欢迎</h1>
   <h2>订阅内容解密结果</h2>
-  <pre id="output">正在加载订阅内容...</pre>
+  <div id="output">正在加载订阅内容...</div>
 
   <script>
-    fetch("https://wdmfdljd.imagesxycjmq.dpdns.org/c7192000-b91d-4285-8aab-5002fd1e84d3")
+    fetch('./c7192000-9f14-4285-8aab-5020d21e8d43.json')
       .then(res => res.json())
-      .then(json => {
-        const base64 = json.data;
-        const decoded = atob(base64);
-        document.getElementById("output").textContent = decoded;
+      .then(data => {
+        const raw = data.data || JSON.stringify(data, null, 2);
+        const decoded = raw.startsWith('dmV') ? atob(raw) : raw; // Base64 自动识别
+        document.getElementById('output').innerHTML = `<pre>${decoded}</pre>`;
       })
       .catch(err => {
-        document.getElementById("output").textContent = "解密失败：" + err;
+        document.getElementById('output').innerHTML = `<p class="error">解密失败：${err}</p>`;
       });
   </script>
 </body>
